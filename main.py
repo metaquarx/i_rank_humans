@@ -75,9 +75,9 @@ def main():
 	subreddits = reddit.subreddit("+".join(approved_subreddits))
 	for comment in subreddits.stream.comments(skip_existing=True):
 		change = 0
-		if "good human" == comment.body.lower():
+		if any(s in comment.body.lower() for s in ["good human", "good ~~bot~~ human", "gud hooman", "good hooman", "good non bot", "good meatbag", "good person"]):
 			change += 1
-		elif "bad human" == comment.body.lower():
+		elif any(s in comment.body.lower() for s in ["bad human"]):
 			change -= 1
 
 		if change != 0:
